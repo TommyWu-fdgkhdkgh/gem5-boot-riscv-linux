@@ -26,8 +26,8 @@ buildroot/build:
 .PHONY: linux/build
 linux/build:
 	@ git clone --depth 1 -b v6.8 https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-	@ cd linux && make ARCH=riscv CROSS_COMPILE=$(realpath ../buildroot/output/host/bin)/riscv64-buildroot-linux-gnu- defconfig
-	@ cd linux && make ARCH=riscv CROSS_COMPILE=$(realpath ../buildroot/output/host/bin)/riscv64-buildroot-linux-gnu- vmlinux Image -j$(shell nproc)
+	@ cd linux && make ARCH=riscv CROSS_COMPILE=$(realpath ./buildroot/output/host/bin)/riscv64-buildroot-linux-gnu- defconfig
+	@ cd linux && make ARCH=riscv CROSS_COMPILE=$(realpath ./buildroot/output/host/bin)/riscv64-buildroot-linux-gnu- vmlinux Image -j$(shell nproc)
 
 ###########################
 ########  OpenSBI  ########
@@ -37,7 +37,7 @@ linux/build:
 opensbi/build:
 	@ git clone https://github.com/riscv-software-src/opensbi.git
 	@ cd opensbi && git checkout 0b041e58c0787f76325da5081e41a13bf304d328
-	@ cd opensbi && make CROSS_COMPILE=$(realpath ../buildroot/output/host/bin)/riscv64-buildroot-linux-gnu- PLATFORM=generic FW_PAYLOAD_PATH=$(realpath ../linux/arch/riscv/boot/Image) -j$(shell nproc)
+	@ cd opensbi && make CROSS_COMPILE=$(realpath ./buildroot/output/host/bin)/riscv64-buildroot-linux-gnu- PLATFORM=generic FW_PAYLOAD_PATH=$(realpath ./linux/arch/riscv/boot/Image) -j$(shell nproc)
 
 #################
 ####  gem5  #####
