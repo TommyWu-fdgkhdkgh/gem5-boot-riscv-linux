@@ -58,7 +58,7 @@ elif args.cpu_type == "minor":
 elif args.cpu_type == "o3":
     print("cpy_type : o3")
     processor = SimpleProcessor(
-        cpu_type=CPUTypes.O3, isa=ISA.RISCV, num_cores=num_cores
+        cpu_type=CPUTypes.O3, isa=ISA.RISCV, num_cores=args.num_cores
     )
 else:
     assert False
